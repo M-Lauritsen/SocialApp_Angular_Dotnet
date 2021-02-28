@@ -13,21 +13,27 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'members',
-    component: MemberListComponent,
+    path: '',
+    runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'members/:id',
-    component: MemberDetailComponent,
-  },
-  {
-    path: 'lists',
-    component: ListsComponent,
-  },
-  {
-    path: 'messages',
-    component: MessagesComponent,
+    children: [
+      {
+        path: 'members',
+        component: MemberListComponent,
+      },
+      {
+        path: 'members/:id',
+        component: MemberDetailComponent,
+      },
+      {
+        path: 'lists',
+        component: ListsComponent,
+      },
+      {
+        path: 'messages',
+        component: MessagesComponent,
+      },
+    ],
   },
   {
     path: '**',
