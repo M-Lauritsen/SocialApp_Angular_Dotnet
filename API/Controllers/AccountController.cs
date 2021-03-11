@@ -12,9 +12,9 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        private readonly Datacontext _context;
+        private readonly DataContext _context;
         private readonly ITokenService _tokenService;
-        public AccountController(Datacontext context, ITokenService tokenService)
+        public AccountController(DataContext context, ITokenService tokenService)
         {
             _tokenService = tokenService;
             _context = context;
