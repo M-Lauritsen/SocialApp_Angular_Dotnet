@@ -7,7 +7,7 @@
     placeholder="{{ label }}"
   />
   <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">
-    Please enter {{ label }}
+    Please enter a {{ label }}
   </div>
   <div *ngIf="ngControl.control.errors?.minlength" class="invalid-feedback">
     {{ label }} must be at least
