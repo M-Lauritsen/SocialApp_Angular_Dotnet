@@ -17,6 +17,7 @@ export class MembersService {
   constructor(private http: HttpClient) {}
 
   getMembers(page?: number, itemsPerPage?: number) {
+    console.log(page);
     let params = new HttpParams();
     if (page !== null && itemsPerPage !== null) {
       params = params.append('pageNumber', page.toString());
