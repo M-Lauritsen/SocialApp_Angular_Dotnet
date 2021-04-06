@@ -31,12 +31,13 @@
     </div>
     <div class="form-group px-2">
       <label>Show: </label>
-      <select name="gender" style="width: 130px" class="form-control ml-1">
-        <option
-          [(ngModel)]="userParams.gender"
-          *ngFor="let gender of genderList"
-          [value]="gender.value"
-        >
+      <select
+        name="gender"
+        [(ngModel)]="userParams.gender"
+        style="width: 130px"
+        class="form-control ml-1"
+      >
+        <option *ngFor="let gender of genderList" [value]="gender.value">
           {{ gender.display }}
         </option>
       </select>
