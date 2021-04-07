@@ -18,6 +18,11 @@ export class MembersService {
   constructor(private http: HttpClient) {}
 
   getMembers(userParams: UserParams) {
+    var response = this.memberCache.get(Object.values(userParams).join('-'));
+    if (response) {
+      return of(response);
+    }
+
     let params = this.getPaginationHeaders(
       userParams.pageNumber,
       userParams.pageSize
@@ -28,12 +33,26 @@ export class MembersService {
     params = params.append('gender', userParams.gender);
     params = params.append('orderBy', userParams.orderBy);
 
-    return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params);
+    return this.getPaginatedResult<Member[]>(
+      this.baseUrl + 'users',
+      params
+    ).pipe(
+      map((response) => {
+        this.memberCache.set(Object.values(userParams).join('-'), response);
+        return response;
+      })
+    );
   }
 
   getMember(username: string) {
-    const member = this.members.find((u) => u.username === username);
-    if (member !== undefined) return of(member);
+    const member = [...this.memberCache.values()]
+      .reduce((array, element) => array.concat(element.result), [])
+      .find((member: Member) => member.username === username);
+
+    if (member) {
+      return of(member);
+    }
+
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
 
