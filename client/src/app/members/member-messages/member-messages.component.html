@@ -42,14 +42,25 @@
     </ul>
   </div>
   <div class="card-footer">
-    <form class="input-group">
-      <input
-        type="text"
-        class="form-control input-sm"
-        placeholder="Send a private message"
-      />
-      <div class="input-group-append">
-        <button class="btn btn-primary" type="submit">Send</button>
+    <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+      <div class="input-group">
+        <input
+          name="messageContent"
+          required
+          [(ngModel)]="messageContent"
+          type="text"
+          class="form-control input-sm"
+          placeholder="Send a private message"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-primary"
+            [disabled]="!messageForm.valid"
+            type="submit"
+          >
+            Send
+          </button>
+        </div>
       </div>
     </form>
   </div>
