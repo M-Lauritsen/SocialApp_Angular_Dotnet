@@ -23,7 +23,7 @@ namespace API.Extension
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly); // AutoMapper
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlite(config.GetConnectionString("DefaultConnection")); // Sqlite Configuration
+                options.UseNpgsql(config.GetConnectionString("DefaultConnection")); // Sqlite Configuration
             });
 
             return services;
